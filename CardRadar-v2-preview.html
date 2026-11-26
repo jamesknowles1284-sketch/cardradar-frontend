@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1220">
+<title>CardRadar | Football Booking Insights</title>
+<style>
+:root{--bg:#0b1220;--panel:#142136;--panel2:#1b2b43;--line:#2c405d;--text:#f3f6fc;--muted:#a5b2c6;--gold:#f4c15a;--green:#5bd6a5;--red:#ff8585}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% -10%,#263d5d 0,transparent 34%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{max-width:980px;margin:auto;padding:20px 14px 46px}.header{display:flex;align-items:center;gap:12px;margin-bottom:18px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#ffe5a2,var(--gold));color:#172235;display:grid;place-items:center;font-size:25px;font-weight:900}.brand{font-size:25px;font-weight:900;letter-spacing:-.7px}.tag{font-size:11px;letter-spacing:1.5px;color:var(--muted);font-weight:800}
+.hero,.panel{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:18px;margin:13px 0}.hero{background:linear-gradient(120deg,#203552,#142136);padding:23px}.eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:900;color:var(--gold)}h1{font-size:clamp(26px,5vw,38px);line-height:1.1;margin:8px 0}h2{font-size:17px;margin:0 0 13px}.muted{color:var(--muted)}.notice{font-size:12px;color:#d4deec;background:#0d192a;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.label{display:block;color:var(--muted);font-size:12px;font-weight:800;margin:10px 0 5px}select,input{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#0c1727;color:var(--text);font:inherit}
+.fixture{display:flex;align-items:center;gap:10px;margin:12px 0}.team{flex:1;background:#0d192a;border:1px solid var(--line);padding:13px 8px;text-align:center;border-radius:12px;font-weight:850}.vs{font-size:11px;color:var(--muted);font-weight:900}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#0d192a;border:1px solid var(--line);border-radius:12px;padding:12px}.stat strong{display:block;font-size:21px}.stat span{font-size:11px;color:var(--muted)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center;justify-content:space-between}.toolbar input{flex:1;min-width:180px}.btn{background:var(--gold);color:#182235;border:0;border-radius:10px;padding:10px 13px;font-weight:900;cursor:pointer}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+.player{display:flex;gap:11px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.player:last-child{border:0}.rank{width:24px;color:var(--muted);font-weight:900}.details{flex:1;min-width:0}.name{font-weight:900}.meta{font-size:12px;color:var(--muted)}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.chip{font-size:11px;background:#0c1727;border:1px solid var(--line);padding:5px 8px;border-radius:99px;color:#dce5f2}.score{text-align:right;min-width:58px}.score b{font-size:23px;color:var(--gold)}.score small{display:block;color:var(--muted);font-size:10px}.bar{height:6px;background:#2b3c54;border-radius:9px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--gold),var(--red))}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini{background:#0d192a;border:1px solid var(--line);padding:13px;border-radius:13px}.mini strong{display:block;margin-bottom:5px}.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:22px}
+@media(max-width:650px){.grid,.two{grid-template-columns:1fr}.wrap{padding:14px 11px 35px}.hero{padding:19px}.player{gap:8px}.score{min-width:48px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="header"><div class="logo">CR</div><div><div class="brand">CardRadar</div><div class="tag">READ THE GAME. TRACK THE CARDS.</div></div></header>
+<section class="hero"><div class="eyebrow">DISCIPLINARY INTELLIGENCE</div><h1>Look beyond the yellow card.</h1><p class="muted">Explore player foul patterns, opposing matchups and booking indicators. Understand the factors behind a player's disciplinary record.</p><div class="notice"><strong>DEMO MODE:</strong> This preview uses illustrative sample data, not live fixtures or verified current player statistics. Scores are indicators only, not probabilities or betting advice.</div></section>
+<div class="grid">
+<section class="panel">
+<h2>Find a match</h2>
+<label class="label" for="league">Competition</label><select id="league"><option>Premier League</option><option>Championship</option><option>League One</option></select>
+<label class="label" for="fixture">Sample fixture</label><select id="fixture"><option>Nottingham Forest v Brighton</option><option>Arsenal v Chelsea</option><option>Everton v Newcastle</option></select>
+<div class="fixture"><div class="team" id="home">Nottingham Forest</div><div class="vs">VS</div><div class="team" id="away">Brighton</div></div>
+<p class="muted" style="font-size:12px;margin-bottom:0">Fixture selector is a visual demo until a fixtures data source is connected.</p>
+</section>
+<section class="panel">
+<h2>Match overview</h2>
+<div class="statgrid"><div class="stat"><strong>5</strong><span>Past meetings*</span></div><div class="stat"><strong>4.2</strong><span>Cards per match*</span></div><div class="stat"><strong>25.6</strong><span>Fouls per match*</span></div></div>
+<p class="muted" style="font-size:11px;margin-bottom:0">*Illustrative values only.</p>
+</section>
+</div>
+<section class="panel">
+<div class="toolbar"><h2 style="margin:0">Booking risk indicators</h2><button class="btn secondary" id="sort">Sort: highest first ↓</button></div>
+<label class="label" for="search">Search players or positions</label><input id="search" placeholder="Search player or position…">
+<div id="players"></div>
+</section>
+<section class="panel">
+<h2>Player-versus-player matchups</h2>
+<div class="two">
+<div class="mini"><strong>Who could commit fouls?</strong><span class="muted">Compare defensive role, fouls committed per 90, tackles and recent card history.</span></div>
+<div class="mini"><strong>Who could draw fouls?</strong><span class="muted">Look for dribblers and direct runners who regularly take on the opposing defender.</span></div>
+</div>
+<div class="notice">A useful matchup needs both players' verified statistics, expected minutes, team tactics and confirmed starting line-ups. CardRadar should show missing information rather than guess.</div>
+</section>
+<section class="panel">
+<h2>How CardRadar will assess a player</h2>
+<div class="chips"><span class="chip">Season yellow cards</span><span class="chip">Red cards</span><span class="chip">Recent form</span><span class="chip">Fouls committed</span><span class="chip">Fouls drawn</span><span class="chip">Tackles</span><span class="chip">Referee record</span><span class="chip">Player matchup</span><span class="chip">Expected minutes</span></div>
+<p class="muted" style="font-size:13px">Each factor will be displayed separately so people can see why a player is highlighted. The final score will be a relative indicator unless reliable historical data supports a properly calibrated probability.</p>
+<div class="notice"><strong>Data connection:</strong> Not connected yet. The next technical step is a secure football-data service. Ship.page hosts static HTML, CSS and JavaScript; a private API key must not be placed in this public page.</div>
+</section>
+<div class="footer">CARDRADAR · PROTOTYPE · SAMPLE DATA ONLY · GAMBLE RESPONSIBLY</div>
+</div>
+<script>
+const players=[
+{name:"Morgan Gibbs-White",team:"Nottingham Forest",position:"Attacking midfielder",yellows:5,reds:0,fouls:2.1,drawn:2.4,score:74,note:"Could be involved in midfield duels; sample indicators only."},
+{name:"Neco Williams",team:"Nottingham Forest",position:"Full-back",yellows:4,reds:0,fouls:1.7,drawn:0.8,score:62,note:"Wide defensive role may bring one-on-one challenges."}
+];
+let descending=true;
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=players.filter(p=>(p.name+" "+p.position+" "+p.team).toLowerCase().includes(q)).sort((a,b)=>descending?b.score-a.score:a.score-b.score);
+ document.getElementById("players").innerHTML=list.map((p,i)=>`<div class="player"><div class="rank">${i+1}</div><div class="details"><div class="name">${p.name}</div><div class="meta">${p.team} · ${p.position}</div><div class="chips"><span class="chip">🟨 ${p.yellows} sample yellows</span><span class="chip">🟥 ${p.reds} reds</span><span class="chip">⚑ ${p.fouls.toFixed(1)} fouls/90</span><span class="chip">↗ ${p.drawn.toFixed(1)} drawn/90</span></div><div class="bar"><span style="width:${p.score}%"></span></div><div class="meta" style="margin-top:7px">${p.note}</div></div><div class="score"><b>${p.score}</b><small>sample index</small></div></div>`).join("")||'<p class="muted">No players match that search.</p>';
+}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("sort").addEventListener("click",()=>{descending=!descending;document.getElementById("sort").textContent="Sort: "+(descending?"highest first ↓":"lowest first ↑");render()});
+document.getElementById("fixture").addEventListener("change",e=>{const v=e.target.value.split(" v ");document.getElementById("home").textContent=v[0];document.getElementById("away").textContent=v[1]});
+render();
+</script>
+</body>
+</html>
